@@ -1,0 +1,259 @@
+a[href] {
+	color: cadetblue;
+	transition: color 0.3s;
+}
+
+a[href]:hover {
+	color: gray !important;
+}
+
+a[href]:active {
+	color: blue !important;
+}
+
+/* The actual timeline (the vertical ruler) */
+.timeline {
+	position: relative;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+/* The actual timeline (the vertical ruler) */
+.timeline::after {
+	content: '';
+	position: absolute;
+	background-color: #e0e0e0;
+	width: 6px;
+	top: 0;
+	bottom: 0;
+	left: 17px;
+}
+
+/* Left align */
+.timeline-left {
+	left: 0%;
+}
+
+.timeline-gray::after {
+	background-color: rgba(227, 227, 227, 1);
+}
+
+/* Container around content */
+.timeline > .container {
+	padding: 0px 0px 15px 44px;
+	position: relative;
+	background-color: inherit;
+	width: 100%;
+}
+
+/* The circles on the timeline */
+.timeline > .container::after {
+	content: '';
+	background-size: 22px 22px;
+	background-position: center;
+	text-align: center;
+	color: black;
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	background-color: white;
+	border: 4px solid;
+	top: 15px;
+	margin-left: 0px;
+	border-radius: 50%;
+	z-index: 1;
+}
+
+.timeline > .container-success::after {
+	border-color: rgb(147, 243, 123);
+	background-image: url("../images/success.svg");
+}
+
+.timeline > .container-danger::after {
+	border-color: rgb(247, 37, 37);
+	background-image: url("../images/virus.svg");
+}
+
+.timeline > .container-info::after {
+	border-color: rgb(78, 154, 247);
+	background-image: url("../images/info.svg");
+}
+
+/* Add arrows to the right container (pointing left) */
+.timeline .right::before {
+	content: " ";
+	height: 0;
+	position: absolute;
+	top: 22px;
+	width: 0;
+	z-index: 1;
+	left: 35px;
+	border: medium solid black;
+	border-width: 10px 10px 10px 0;
+	/* border-color: transparent rgb(147, 243, 123) transparent transparent; */
+}
+
+.timeline .container-success.right::before {
+	border-color: transparent rgb(147, 243, 123) transparent transparent;
+}
+
+.timeline .container-danger.right::before {
+	border-color: transparent rgb(247, 37, 37) transparent transparent;
+}
+
+.timeline .container-info.right::before {
+	border-color: transparent rgb(78, 154, 247) transparent transparent;
+}
+
+/* Fix the circle for containers on the right side */
+.timeline .right::after {
+	left: -13px;
+}
+
+/* The actual content */
+.timeline .content {
+	padding: 10px;
+	position: relative;
+	border-radius: 6px;
+}
+
+.timeline .container-success > .content {
+	border: medium solid rgb(147, 243, 123);
+	background-color: rgba(190, 255, 174, 0.25);
+}
+
+.timeline .container-danger > .content {
+	border: medium solid rgb(247, 37, 37);
+	background-color: rgba(255, 187, 187, 0.25);
+}
+
+.timeline .container-info > .content {
+	border: medium solid rgb(78, 154, 247);
+	background-color: rgba(168, 201, 241, 0.25);
+}
+
+.timeline .content > .title {
+	font-size: 18px;
+	margin-bottom: 100px;
+	font-weight: 300;
+	color: #434445;
+}
+
+.timeline .container-success > .content > .title {
+	border-bottom: 3px dotted rgb(147, 243, 123);
+}
+
+.timeline .container-danger > .content > .title {
+	border-bottom: 3px dotted rgb(247, 37, 37);
+}
+
+.timeline .container-info > .content > .title {
+	border-bottom: 3px dotted rgb(78, 154, 247);
+}
+
+.timeline .content > .body {
+	font-size: 14px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	color: #86898c;
+}
+
+.timeline .content > .footer {
+	/* border: solid 1px black !important; */
+	padding-bottom: 9px;
+}
+
+.timeline .content .date {
+	position: relative;
+	font-size: 10px;
+	padding-top: 8px;
+	vertical-align: middle;
+}
+
+.timeline .content a[href] {
+	float: right;
+	background-color: rgb(194, 193, 193); /* Green */
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+	cursor: pointer;
+	border-radius: 10px;
+	position: relative;
+	transition: 0.5s;
+}
+
+.timeline .content a[href]::after {
+	content: '»';
+	padding-top: 5px;
+	padding-right: 10px;
+    font-size: 14px;
+	position: absolute;
+	opacity: 0;
+	top: 0;
+	right: -15px;
+	transition: 0.5s;
+}
+
+.timeline .content > .footer a[href]:hover {
+	padding-right: 23px;
+	box-shadow: 0 6px 11px 0 rgba(0,0,0,0.24), 0 12px 20px 0 rgba(0,0,0,0.19);
+}
+
+.timeline .content > .footer > a[href]:hover::after {
+	opacity: 1;
+	right: 0;
+}
+
+#map-mun {height: 600px;}
+.leaflet-container {
+    background-color:rgba(255,0,0,0.0);
+}
+
+.collapsible {
+	background-color: #777;
+	color: white;
+	cursor: pointer;
+	padding: 18px;
+	width: 100%;
+	border: none;
+	text-align: left;
+	outline: none;
+	font-size: 15px;
+}
+
+.active, .collapsible:hover {
+	background-color: #555;
+}
+
+.collapsible::after {
+	content: '\002B';
+	color: white;
+	font-weight: bold;
+	float: right;
+	margin-left: 5px;
+}
+
+.active::after {
+	content: '\2212';
+}
+
+.collapsible + .content {
+	padding: 0 18px;
+	overflow: hidden;
+	max-height: 1200px;
+	background-color: #f1f1f1;
+	transition: max-height 1s linear;
+	-webkit-transition: max-height 1s linear;
+	animation-delay: 0;
+}
+
+.collapsible.active + .content {
+	max-height: 100;
+}
+
+.canvas-content {
+	margin: 0 auto;
+}

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Coronavirus en Cuba (en vivo)</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/w3.css">
+	<link rel="stylesheet" href="css/leaflet.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<link rel="icon" href="images/logo.jpg">
+</head>
+<body>
+	<div class="w3-row-padding w3-margin">
+		<div class="w3-col m8 w3-center">
+			<div class="w3-col s12">
+				<div class="w3-card-4 w3-margin w3-padding w3-left-align">
+					<img src="images/logo.jpg" style="width: 121px;height: 68px;margin-right: 5px;float: left;">
+					<div style="min-height: 68px;">
+					<img src="images/info2.svg" style="height: 20px;width: 20px;">
+					<small>
+						Todos los datos nacionales han sido extraidos directamente del <a href="https://salud.msp.gob.cu/">sitio web oficial</a> del Ministerio de Salud P&uacute;blica de Cuba.
+					</small><br>
+					<!-- <img src="images/info2.svg" style="height: 20px;width: 20px;">
+					<small>
+						Todos los datos internacionales han sido extraidos directamente del <a href="https://www.who.int/">sitio web oficial</a> de la Organización Mundial de la Salud.
+					</small><br> -->
+					<img src="images/info3.svg" style="height: 20px;width: 20px;">
+					<small>
+						&Uacute;ltima actualizaci&oacute;n: <ins>27 de marzo, 3:00 p.m.</ins>
+					</small>
+					</div>
+				</div>
+			</div>
+			<div class="w3-col s12 w3-center">
+				<div class="w3-card-4 w3-margin">
+					<button id="change_map_btn" class="w3-btn w3-white w3-border w3-hover-light-grey w3-round-xlarge w3-small" onclick="change_map()" style="margin-top: 5px;">Ver mapa de los municipios</button>
+					<div style="height: 400px;">
+						<div id="map-provincias" style="height: 100%;"></div>
+						<div id="map-municipios" style="height: 100%;"></div>
+					</div>
+					<span id="unknown_text"></span>
+				</div>
+			</div>
+		</div>
+		<div class="w3-col l4">
+			<div class="w3-card-4 w3-margin" style="max-height: 575px; overflow: hidden; overflow-y: auto;">
+				<header class="w3-container w3-padding w3-center w3-light-grey">
+					<img src="images/lightning.svg" alt="" height="24px">
+					<span style="color: #434445;">L&iacute;nea del tiempo</span>
+				</header>
+				<div class="timeline timeline-left timeline-blue w3-padding" id="timeline">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="w3-row-padding w3-margin-top">
+		<div class="w3-col s12 l6 w3-center">
+			<div class="w3-card-4">
+				<header class="w3-container w3-padding w3-center w3-light-grey" style="color:#434445!important">
+					Casos activos
+				</header>
+				<div class="w3-container w3-padding-top">
+					<div class="w3-col s12">
+						<span id="cantidad_casos_activos"></span>
+						<br>
+						<sup>
+							infectados actualmente
+						</sup>
+					</div>
+					<div class="w3-col l6 m12">
+						<span id="cantidad_casos_estables"></span>
+						<br>
+						<sup>
+							estables
+						</sup>
+					</div>
+					<div class="w3-col l6 m12">
+						<span id="cantidad_casos_graves_o_criticos"></span>
+						<br>
+						<sup>
+							graves o críticos
+						</sup>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="w3-col s12 l6 w3-center">
+			<div class="w3-card-4">
+				<header class="w3-container w3-padding w3-center w3-light-grey" style="color:#434445!important">
+					Casos inactivos
+				</header>
+				<div class="w3-container w3-padding-top">
+					<div class="w3-col s12">
+						<span id="cantidad_casos_inactivos"></span>
+						<br>
+						<sup>
+							casos inactivos
+						</sup>
+					</div>
+					<div class="w3-col l4 m12">
+						<span id="cantidad_casos_evacuados"></span>
+						<br>
+						<sup>
+							evacuados
+						</sup>
+					</div>
+					<div class="w3-col l4 m12">
+						<span id="cantidad_casos_recuperados"></span>
+						<br>
+						<sup>
+							recuperados
+						</sup>
+					</div>
+					<div class="w3-col l4 m12">
+						<span id="cantidad_casos_muertos"></span>
+						<br>
+						<sup>
+							muertos
+						</sup>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="w3-row-padding w3-margin-top">
+		<div class="w3-col l4 w3-center">
+			<div class="w3-card-4 w3-padding">
+				<div class="canvas-content" style="height: 250px;width: 250px;" id="toggle_chart_pie_genero_total-1">
+					<canvas id="chart_pie_genero_total"></canvas>
+				</div>
+			</div>
+		</div>
+		<div class="w3-col l4 w3-center">
+			<div class="w3-card-4 w3-padding">
+				<div class="canvas-content" style="height: 250px;width: 250px;">
+					<canvas id="chart_pie_genero_activos"></canvas>
+				</div>
+			</div>
+		</div>
+		<div class="w3-col l4 w3-center">
+			<div class="w3-card-4 w3-padding">
+				<div class="canvas-content" style="height: 250px;width: 250px;">
+					<canvas id="chart_pie_genero_inactivos"></canvas>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="w3-row-padding w3-margin-top">
+		<div class="w3-col l6 w3-center">
+			<div class="w3-card-4">
+				<div class="canvas-content" style="height:400px">
+					<canvas id="chart_line_casos_por_dia"></canvas>
+				</div>
+			</div>
+		</div>
+		<div class="w3-col l6 w3-center">
+			<div class="w3-card-4">
+				<div class="canvas-content" style="height:400px">
+					<canvas id="chart_line_casos_totales"></canvas>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="w3-row-padding w3-margin-top w3-margin-bottom">
+		<div class="w3-col s12 w3-center">
+			<div class="w3-card-4 w3-padding">
+				<small>
+					Todos los derechos reservados
+				</small><br>
+				<small>
+					2020
+				</small><br>
+				<img src="images/logo_matcom.jpeg" alt="{Facultad de Matemática y Computación}" title="Facultad de Matemática y Computación" style="height: 60px;width: 60px;">
+				<span style="margin-right: 10px;"></span>
+				<img src="images/logo-uh.jpg" alt="{Universidad de La Habana}" title="Universidad de La Habana" style="height: 60px;width: 60px;">
+			</div>
+		</div>
+	</div>
+
+	<script src="js/jquery-3.1.0.min.js"></script>
+	<script src="js/leaflet.js"></script>
+	<script src="js/chart.min.js"></script>
+	<script src="js/stats.js"></script>
+</body>
+</html>
