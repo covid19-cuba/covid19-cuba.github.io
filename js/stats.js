@@ -533,7 +533,7 @@ $.getJSON("data/data.json", function(data){
 	});
 	map_provincias.zoomControl.setPosition('bottomright');
 	map_provincias.fitBounds(geojson_provincias.getBounds());
-	map_provincias.setMaxBounds(geojson_provincias.getBounds().pad(0.01));
+	map_provincias.setMaxBounds(geojson_provincias.getBounds().pad(0.1));
 	map_provincias.setMinZoom(map_provincias.getZoom());
 
 	// municipios
@@ -613,7 +613,7 @@ $.getJSON("data/data.json", function(data){
 	});
 	map_municipios.zoomControl.setPosition('bottomright');
 	map_municipios.fitBounds(geojson_municipios.getBounds());
-	map_municipios.setMaxBounds(geojson_municipios.getBounds().pad(0.01));
+	map_municipios.setMaxBounds(geojson_municipios.getBounds().pad(0.1));
 	map_municipios.setMinZoom(map_municipios.getZoom());
 	$('#map-municipios').hide();
 

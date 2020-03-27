@@ -1,50 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Coronavirus en Cuba (en vivo)</title>
+<title>Coronavirus en Cuba (en vivo)</title>
 
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="css/w3.css">
-	<link rel="stylesheet" href="css/leaflet.css">
-	<link rel="stylesheet" href="css/style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/w3.css">
+<link rel="stylesheet" href="css/leaflet.css">
+<link rel="stylesheet" href="css/style.css">
 
-	<link rel="icon" href="images/logo.jpg">
-</head>
 <body>
 	<div class="w3-row-padding w3-margin">
 		<div class="w3-col m8 w3-center">
-			<div class="w3-col s12">
-				<div class="w3-card-4 w3-margin w3-padding w3-left-align">
-					<img src="images/logo.jpg" style="width: 121px;height: 68px;margin-right: 5px;float: left;">
-					<div style="min-height: 68px;">
-					<img src="images/info2.svg" style="height: 20px;width: 20px;">
-					<small>
-						Todos los datos nacionales han sido extraidos directamente del <a href="https://salud.msp.gob.cu/">sitio web oficial</a> del Ministerio de Salud P&uacute;blica de Cuba.
-					</small><br>
-					<!-- <img src="images/info2.svg" style="height: 20px;width: 20px;">
-					<small>
-						Todos los datos internacionales han sido extraidos directamente del <a href="https://www.who.int/">sitio web oficial</a> de la Organización Mundial de la Salud.
-					</small><br> -->
-					<img src="images/info3.svg" style="height: 20px;width: 20px;">
-					<small>
-						&Uacute;ltima actualizaci&oacute;n: <ins>27 de marzo, 3:00 p.m.</ins>
-					</small>
+			<div class="w3-col s12 w3-left-align w3-margin-top">
+				<div class="w3-card-4 w3-padding w3-margin-left w3-margin-bottom w3-margin-right">
+					<div class="w3-row">
+						<div class="w3-col l2 m12">
+							<img src="images/info2.svg" style="height: 20px;width: 20px;">
+						</div>
+						<div class="w3-col l0 m12">
+							<small>
+								Todos los datos nacionales han sido extraidos directamente del <a href="">sitio web oficial</a> del Ministerio de Salud P&uacute;blica de Cuba.
+							</small><br>
+							<img src="images/info2.svg" style="height: 20px;width: 20px;">
+							<small>
+								Todos los datos internacionales han sido extraidos directamente del <a href="">sitio web oficial</a> de la Organización Mundial de la Salud.
+							</small><br>
+							<img src="images/info3.svg" style="height: 20px;width: 20px;">
+							<small>
+								&Uacute;ltima actualizaci&oacute;n: <ins>27 de marzo, 8:00 a.m.</ins>
+							</small>
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="w3-col s12 w3-center">
-				<div class="w3-card-4 w3-margin">
-					<button id="change_map_btn" class="w3-btn w3-white w3-border w3-hover-light-grey w3-round-xlarge w3-small" onclick="change_map()" style="margin-top: 5px;">Ver mapa de los municipios</button>
+				<div class="w3-card-4 w3-margin-left w3-margin-bottom w3-margin-right">
+					<button id="change_map_btn" onclick="change_map()">Ver mapa de los municipios</button>
 					<div style="height: 400px;">
 						<div id="map-provincias" style="height: 100%;"></div>
 						<div id="map-municipios" style="height: 100%;"></div>
 					</div>
-					<span id="unknown_text"></span>
 				</div>
 			</div>
 		</div>
 		<div class="w3-col l4">
-			<div class="w3-card-4 w3-margin" style="max-height: 575px; overflow: hidden; overflow-y: auto;">
+			<div class="w3-card-4 w3-margin" style="max-height: 528px; overflow: hidden; overflow-y: auto;">
 				<header class="w3-container w3-padding w3-center w3-light-grey">
 					<img src="images/lightning.svg" alt="" height="24px">
 					<span style="color: #434445;">L&iacute;nea del tiempo</span>
@@ -116,7 +115,7 @@
 						<span id="cantidad_casos_muertos"></span>
 						<br>
 						<sup>
-							fallecidos
+							muertos
 						</sup>
 					</div>
 				</div>
@@ -149,14 +148,14 @@
 	<div class="w3-row-padding w3-margin-top">
 		<div class="w3-col l6 w3-center">
 			<div class="w3-card-4">
-				<div class="canvas-content" style="height:400px">
+				<div class="canvas-content" style="height: 400px;">
 					<canvas id="chart_line_casos_por_dia"></canvas>
 				</div>
 			</div>
 		</div>
 		<div class="w3-col l6 w3-center">
 			<div class="w3-card-4">
-				<div class="canvas-content" style="height:400px">
+				<div class="canvas-content" style="height: 400px;">
 					<canvas id="chart_line_casos_totales"></canvas>
 				</div>
 			</div>
@@ -171,7 +170,7 @@
 				<small>
 					2020
 				</small><br>
-				<img src="images/logo_matcom.jpeg" alt="{Facultad de Matemática y Computación}" title="Facultad de Matemática y Computación" style="height: 60px;width: 60px;">
+				<img src="images/logo_matcom.jpeg" alt="{Facultad de Matemática y Computación"}" title="Facultad de Matemática y Computación" style="height: 60px;width: 60px;">
 				<span style="margin-right: 10px;"></span>
 				<img src="images/logo-uh.jpg" alt="{Universidad de La Habana}" title="Universidad de La Habana" style="height: 60px;width: 60px;">
 			</div>
@@ -181,6 +180,7 @@
 	<script src="js/jquery-3.1.0.min.js"></script>
 	<script src="js/leaflet.js"></script>
 	<script src="js/chart.min.js"></script>
-	<script src="js/stats.js"></script>
+	<!-- <script src="js/chartjs-plugin-labels.js"></script> -->
+	<script src="js/stats2.js"></script>
 </body>
 </html>
