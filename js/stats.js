@@ -253,7 +253,7 @@ $.getJSON("data/data.json", function(data){
 	}
 
 	var fecha_de_inicio = new Date(2020, 2, 9);
-	var fecha_de_fin = new Date(2020, 2, 26);
+	var fecha_de_fin = new Date();
 
 	// grafico de linea para casos totales
 	function get_casos_por_dia(){
