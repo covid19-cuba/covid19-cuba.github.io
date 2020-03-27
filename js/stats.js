@@ -509,9 +509,9 @@ $.getJSON("data/data.json", function(data){
 		let code = properties.ISO_province_code;
 		return `${properties.province}<br><p>Casos totales: <span class="w3-badge w3-teal">${contagiados_por_provincia[ code ]}</span><br>Casos activos: <span class="w3-badge w3-red">${contagiados_por_provincia[ code + "_activos" ]}</span><br>Casos inactivos: <span class="w3-badge w3-green">${contagiados_por_provincia[ code + "_inactivos" ]}</span>`;
 	}
-	geojson_provincias.bindPopup(function(layer){
-		return get_texto_de_provincia(layer.feature.properties);
-	});
+	// geojson_provincias.bindPopup(function(layer){
+	// 	return get_texto_de_provincia(layer.feature.properties);
+	// });
 	geojson_provincias.bindTooltip(function(layer){
 		return get_texto_de_provincia(layer.feature.properties);
 	});
@@ -589,9 +589,9 @@ $.getJSON("data/data.json", function(data){
 		let code = properties.ISO_municipality_code;
 		return `${properties.province}: ${properties.municipality}<br><p>Casos totales: <span class="w3-badge w3-teal">${contagiados_por_municipios[ code ]}</span><br>Casos activos: <span class="w3-badge w3-red">${contagiados_por_municipios[ code + "_activos" ]}</span><br>Casos inactivos: <span class="w3-badge w3-green">${contagiados_por_municipios[ code + "_inactivos" ]}</span>`;
 	}
-	geojson_municipios.bindPopup(function(layer){
-		return get_texto_de_municipio(layer.feature.properties);
-	});
+	// geojson_municipios.bindPopup(function(layer){
+	// 	return get_texto_de_municipio(layer.feature.properties);
+	// });
 	geojson_municipios.bindTooltip(function(layer){
 		return get_texto_de_municipio(layer.feature.properties);
 	});
