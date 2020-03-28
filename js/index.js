@@ -1,6 +1,7 @@
 var desconocidos_provincia = 0;
 var desconocidos_municipio = 0;
 
+$(document).ready(function(){
 $.getJSON("data/municipios.geojson", function(municipios){
 $.getJSON("data/provincias.geojson", function(provincias){
 $.getJSON("data/data.json", function(data){
@@ -43,27 +44,27 @@ $.getJSON("data/data.json", function(data){
 		let cant_pacientes_por_estado = { activos: 0, inactivos: 0, estables: 0, muertes: 0, evacuados: 0, criticos: 0, recuperados: 0};
 		pacientes.forEach(function(paciente){
 			switch (paciente.estado){
-				case "evacuado":
+				case "Evacuado":
 					cant_pacientes_por_estado.evacuados++;
 					cant_pacientes_por_estado.inactivos++;
 					break;
 
-				case "recuperado":
+				case "Recuperado":
 					cant_pacientes_por_estado.recuperados++;
 					cant_pacientes_por_estado.inactivos++;
 					break;
 
-				case "estable":
+				case "Estable":
 					cant_pacientes_por_estado.estables++;
 					cant_pacientes_por_estado.activos++;
 					break;
 
-				case "crítico":
+				case "Crítico":
 					cant_pacientes_por_estado.criticos++;
 					cant_pacientes_por_estado.activos++;
 					break;
 
-				case "muerte":
+				case "Fallecido":
 					cant_pacientes_por_estado.muertes++;
 					cant_pacientes_por_estado.inactivos++;
 					break;
@@ -159,7 +160,10 @@ $.getJSON("data/data.json", function(data){
 					}
 				}
 			},
-			rotation: 2
+			rotation: 2,
+			labeling: {
+				color: "black"
+			}
 		}
 	};
 	new Chart(document.getElementById("chart_pie_genero_total").getContext('2d'), config_genero_totales);
@@ -200,7 +204,10 @@ $.getJSON("data/data.json", function(data){
 					}
 				}
 			},
-			rotation: 2
+			rotation: 2,
+			labeling: {
+				color: "black"
+			}
 		}
 	};
 	new Chart(document.getElementById("chart_pie_genero_activos").getContext('2d'), config_genero_activos);
@@ -239,6 +246,10 @@ $.getJSON("data/data.json", function(data){
 						var percentage = Math.floor(currentValue / total * 10000) / 100;
 						return `${data.labels[ tooltipItem.index ]}: ${currentValue} (${percentage}%)`;
 					}
+				},
+				rotation: 2,
+				labeling: {
+					color: "black"
 				}
 			}
 		}
@@ -320,7 +331,15 @@ $.getJSON("data/data.json", function(data){
 				display: true,
 				text: "Casos por día"
 			},
-			maintainAspectRatio: false
+			maintainAspectRatio: false,
+			tooltips: {
+				mode: "index",
+				intersect: false,
+			},
+			hover: {
+				mode: "index",
+				intersect: false
+			}
 		}
 	};
 	new Chart(document.getElementById("chart_line_casos_por_dia").getContext('2d'), config_casos_por_dia);
@@ -384,7 +403,15 @@ $.getJSON("data/data.json", function(data){
 				display: true,
 				text: "Casos totales por día"
 			},
-			maintainAspectRatio: false
+			maintainAspectRatio: false,
+			tooltips: {
+				mode: "index",
+				intersect: false,
+			},
+			hover: {
+				mode: "index",
+				intersect: false
+			}
 		}
 	};
 	new Chart(document.getElementById("chart_line_casos_totales").getContext('2d'), config_casos_totales);
@@ -619,6 +646,67 @@ $.getJSON("data/data.json", function(data){
 
 	$('.leaflet-control-attribution').hide();
 	change_map();
+
+	Chart.plugins.register({
+		afterDatasetsDraw: function(chartInstance, easing) {
+			if(!("labeling" in chartInstance.options))
+				return;
+
+				// To only draw at the end of animation, check for easing === 1
+			var ctx = chartInstance.chart.ctx;
+
+			chartInstance.data.datasets.forEach(function (dataset, i) {
+				let meta = chartInstance.getDatasetMeta(i);
+				if (!meta.hidden) {
+					meta.data.forEach(function(element, index) {
+						if(meta.data[ index ].hidden)
+							return;
+						// Draw the text in black, with the specified font
+						if("color" in chartInstance.options.labeling)
+							ctx.fillStyle = chartInstance.options.labeling.color;
+
+						else
+							ctx.fillStyle = 'rgb(0, 0, 0)';
+
+						var fontSize = 16;
+						if("fontSize" in chartInstance.options.labeling)
+							ctx.fillStyle = chartInstance.options.labeling.fontSize;
+
+						var fontStyle = 'normal';
+						if("fontStyle" in chartInstance.options.labeling)
+							ctx.fillStyle = chartInstance.options.labeling.fontStyle;
+
+						var fontFamily = 'Helvetica Neue';
+						if("fontFamily" in chartInstance.options.labeling)
+							ctx.fillStyle = chartInstance.options.labeling.fontFamily;
+
+						ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+						// Just naively convert to string for now
+						var dataString = dataset.data[ index ].toString();
+
+						// Make sure alignment settings are correct
+						if("textAlign" in chartInstance.options.labeling)
+							ctx.textAlign = chartInstance.options.labeling.textAlign;
+
+						else
+							ctx.textAlign = 'center';
+
+						if("textBaseline" in chartInstance.options.labeling)
+							ctx.textBaseline = chartInstance.options.labeling.textBaseline;
+
+						else
+							ctx.textBaseline = 'middle';
+
+						var padding = 5;
+						var position = element.tooltipPosition();
+						ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+					});
+				}
+			});
+		}
+	});
+});
 });
 });
 });
