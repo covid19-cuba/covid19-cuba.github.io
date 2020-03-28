@@ -18,8 +18,6 @@ $.getJSON("data/data.json", function(data){
 		let date = get_date(paciente.fecha_de_deteccion);
 
 		if(last_date.getTime() != date.getTime()){
-			// alert(last_date);
-			// alert(date);
 			_id++;
 			_count = 0;
 			last_date = date;
