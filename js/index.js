@@ -123,7 +123,6 @@ $.getJSON("data/data.json", function(data){
 	}
 
 	var cant_pacientes_por_genero = get_cant_pacientes_por_genero();
-	alert(cant_pacientes_por_estado);
 
 	// pacientes totales por género
 	var config_genero_totales = {
@@ -247,11 +246,11 @@ $.getJSON("data/data.json", function(data){
 						var percentage = Math.floor(currentValue / total * 10000) / 100;
 						return `${data.labels[ tooltipItem.index ]}: ${currentValue} (${percentage}%)`;
 					}
-				},
-				rotation: 2,
-				labeling: {
-					color: "black"
 				}
+			},
+			rotation: 2,
+			labeling: {
+				color: "black"
 			}
 		}
 	};
@@ -265,7 +264,8 @@ $.getJSON("data/data.json", function(data){
 	}
 
 	var fecha_de_inicio = new Date(2020, 2, 9);
-	var fecha_de_fin = new Date(2020, 2, 26);
+	var fecha_de_fin = new Date();
+	fecha_de_fin.setDate(fecha_de_fin.getDate() - 1);
 
 	// grafico de linea para casos totales
 	function get_casos_por_dia(){
