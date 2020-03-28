@@ -123,6 +123,7 @@ $.getJSON("data/data.json", function(data){
 	}
 
 	var cant_pacientes_por_genero = get_cant_pacientes_por_genero();
+	alert(cant_pacientes_por_estado);
 
 	// pacientes totales por género
 	var config_genero_totales = {
