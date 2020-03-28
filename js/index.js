@@ -30,7 +30,7 @@ $.getJSON("data/data.json", function(data){
 
 	var pacientes = data[ "pacientes" ];
 
-	var criterio_activo = [ "estable", "crítico" ];
+	var criterio_activo = [ "Estable", "Crítico" ];
 	function es_activo(paciente){
 		let i;
 		for(i = 0 ; i < criterio_activo.length ; i++)
@@ -104,14 +104,14 @@ $.getJSON("data/data.json", function(data){
 		let cant_pacientes_por_genero = { total: 0, masculino: 0, masculinos_activos: 0, masculinos_inactivos: 0, femenino: 0, femeninas_activas: 0, femeninas_inactivas: 0 }
 		pacientes.forEach(function(paciente){
 			switch(paciente.genero){
-				case "femenino":
+				case "Femenino":
 					cant_pacientes_por_genero.femenino++;
 					cant_pacientes_por_genero.total++;
 					cant_pacientes_por_genero.femeninas_activas += es_activo(paciente);
 					cant_pacientes_por_genero.femeninas_inactivas += !es_activo(paciente);
 					break;
 
-				case "masculino":
+				case "Masculino":
 					cant_pacientes_por_genero.masculino++;
 					cant_pacientes_por_genero.total++;
 					cant_pacientes_por_genero.masculinos_activos += es_activo(paciente);
